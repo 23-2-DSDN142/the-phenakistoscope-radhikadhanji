@@ -23,7 +23,7 @@ function setup_layers(pScope){
 
 function faces(x, y, animation, pScope){
   
-  scale(animation.frame*2);
+  scale(animation.frame*2); //animation.frame*2
 
   ellipse(0,0,50,50); // draw head
   fill(30);
