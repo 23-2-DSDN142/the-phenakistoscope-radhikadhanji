@@ -1,7 +1,7 @@
 const SLICE_COUNT = 14; 
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(OUTPUT_GIF(1000));
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); //set back to true
   pScope.set_direction(CCW);
@@ -46,12 +46,21 @@ function faces(x, y, animation, pScope){
 function squares(x, y, animation, pScope){
 
   // this is how you set up a background for a specific layer
+ 
   let angleOffset = (360 / SLICE_COUNT) / 2
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
-  fill(66, 135, 245)
-  arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+  //fill(66, 135, 245)
+  //arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+
+  push()
+  scale(3)
+  if(animation.frame == 0){
+    fill(66, 135, 245)
+    arc(x,y,270,270,backgroundArcStart,backgroundArcEnd);
+  }
+  pop()
 
   fill(255)
   rect(-10,-450-animation.wave()*50,60, 60) // .wave is a cosine wave btw
