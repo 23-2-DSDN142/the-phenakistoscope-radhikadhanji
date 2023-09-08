@@ -6,6 +6,7 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(false); //set back to true
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
+  pScope.load_image("whale" , "png");
 }
 
 function setup_layers(pScope){
@@ -16,7 +17,7 @@ function setup_layers(pScope){
   layer1.mode( RING );
   layer1.set_boundary( 0, 1000 ); //1000
 
-  var layer2 = new PLayer(squares);
+  var layer2 = new PLayer(whales);
   layer2.mode( RING );
   layer2.set_boundary( 0, 600 );
 }
@@ -43,7 +44,7 @@ function faces(x, y, animation, pScope){
 
 }
 
-function squares(x, y, animation, pScope){
+function whales(x, y, animation, pScope){
 
   // this is how you set up a background for a specific layer
  
@@ -63,7 +64,8 @@ function squares(x, y, animation, pScope){
   pop()
 
   fill(255)
-  rect(-10,-450-animation.wave()*50,60, 60) // .wave is a cosine wave btw
+  pScope.draw_image("whale", x,y);
+  //rect(-10,-450-animation.wave()*50,60, 60) // .wave is a cosine wave btw
 //20 20
 //-300
 }
