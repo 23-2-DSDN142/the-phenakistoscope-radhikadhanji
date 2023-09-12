@@ -1,4 +1,4 @@
-const SLICE_COUNT = 12; //14
+const SLICE_COUNT = 14; //14
 
 function setup_pScope(pScope){
   pScope.output_mode(ANIMATED_DISK);
@@ -7,6 +7,7 @@ function setup_pScope(pScope){
   pScope.set_direction(CW);
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("whale" , "png");
+  pScope.load_image("sea", "png");
 }
 
 function setup_layers(pScope){
@@ -20,6 +21,7 @@ function setup_layers(pScope){
   var layer2 = new PLayer(whales);
   layer2.mode( RING );
   layer2.set_boundary( 0, 1000 ); //800
+
 }
 
 function clouds(x, y, animation, pScope){
@@ -33,10 +35,8 @@ function clouds(x, y, animation, pScope){
   let gradientCol = lerpColor(first, last, 0.5);
 
   pScope.fill_background(gradientCol);
-
-  fill(66, 135, 245)
-  arc(x,y,900,900,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
-  //800 800
+  
+  pScope.draw_image("sea", x, -y-animation.wave()*100);
 
   fill(255)
   //Constructing the cloud
@@ -57,20 +57,12 @@ function clouds(x, y, animation, pScope){
 }
 
 function whales(x, y, animation, pScope){
-
-  // this is how you set up a background for a specific layer
-  //fill(66, 135, 245)
-  //arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
-
   push()
   //scale(3)
   if(animation.frame == 0){
     fill(255)
-    scale(0.3);
+    scale(0.35);
    pScope.draw_image("whale", -10,-1500-animation.wave()*100); //x, y
   }
   pop()
-  //rect(-10,-450-animation.wave()*50,60, 60) // .wave is a cosine wave btw
-//20 20
-//-300
 }
