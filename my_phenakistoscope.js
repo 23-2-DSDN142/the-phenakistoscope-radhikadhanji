@@ -54,15 +54,12 @@ function sky() {
 
 function clouds(x, y, animation, pScope){
   
-  
-  
   pScope.draw_image("sea", x, -y-animation.wave()*100); //draws sea w/wave to give a bouncing illusion
 
   cloud(-100, -825, animation, 100, 75); //biggest, topmost cloud
   cloud(-10, -725, animation, 90, 65); //middle cloud
-  cloud(-150, -635, animation, 30, 5); //border-esque pattern 
+  cloud(-150, -625, animation, 30, 5); //border-esque pattern 
   
-
 
 }
 
@@ -98,6 +95,7 @@ function cloud(x, y, animation, w, h){
   ellipse(x,y-animation.wave()*50, w, h); //left edge cloud
   ellipse(x + 160,y-animation.wave()*50, w, h); //right edge cloud
   ellipse(x + 80,(y -4)-animation.wave()*50,w + 50, h); //bottom of cloud
+
 
 
 }
