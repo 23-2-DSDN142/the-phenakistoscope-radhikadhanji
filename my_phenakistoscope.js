@@ -86,10 +86,12 @@ function cloud(x, y, animation, w, h){
   ellipse(x,y-animation.wave()*50, w, h); //left edge cloud
   ellipse(x + 160, y-animation.wave()*50, w, h); //right edge cloud
   ellipse(x + 80, (y-15)-animation.wave()*50,w + 50, h + 25); //bottom of cloud
+
   if(w > 50){
+    //If it is not the border cloud
     noStroke();
-  ellipse(x + 130, (y-65)-animation.wave()*50, w, h + 25);
-  ellipse(x + 40,(y-40)-animation.wave()*50, w, h + 25); //top edges of cloud without lines
+    ellipse(x + 130, (y-65)-animation.wave()*50, w, h + 25);
+    ellipse(x + 40,(y-40)-animation.wave()*50, w, h + 25); //top edges of cloud without lines
 
   }
 
