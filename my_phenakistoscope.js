@@ -1,7 +1,7 @@
-const SLICE_COUNT = 14; //14
+const SLICE_COUNT = 14; 
 
 function setup_pScope(pScope){
-  pScope.output_mode( ANIMATED_DISK);
+  pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); 
   pScope.set_direction(CW);
@@ -14,6 +14,10 @@ function setup_layers(pScope){
 
   new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
 
+  var skyLayer = new PLayer(sky);
+  skyLayer.mode( RING );
+  skyLayer.set_boundary( 0, 1000 ); 
+
   var layer1 = new PLayer(clouds);
   layer1.mode( RING );
   layer1.set_boundary( 0, 1000 ); 
@@ -22,39 +26,43 @@ function setup_layers(pScope){
   layer2.mode( RING );
   layer2.set_boundary( 0, 1000 );
 
-  
+}
 
+function sky() {
+  const first = color(219, 251, 255); //constant for lightest colour (219, 251, 255)
+  const last = color(140, 176, 237); //constant for darkest colour
+  
+  const firstCol = lerpColor(first, last, 0.15); //lightest
+  const secondCol = lerpColor(first, last, 0.45); //second lightest
+  const thirdCol = lerpColor(first, last, 0.75); //second darkest
+  const fourthCol = lerpColor(first, last, 1); //darkest
+  noStroke();
+
+  fill(fourthCol);
+  ellipse(0, 0, 2000);
+
+  fill(thirdCol);
+  ellipse(0, 0, 1800);
+  
+  fill(secondCol);
+  ellipse(0, 0, 1500);
+
+  fill(firstCol);
+  ellipse(0, 0, 1200);
 }
 
 
 function clouds(x, y, animation, pScope){
   
-  const first = color(219, 251, 255);
-  const last = color(140, 176, 237);
-  let gradientCol = lerpColor(first, last, animation.wave());
   
-  let cloudOutline = color(232, 161, 46);
-
-  pScope.fill_background(gradientCol);
   
-  pScope.draw_image("sea", x, -y-animation.wave()*100);
+  pScope.draw_image("sea", x, -y-animation.wave()*100); //draws sea w/wave to give a bouncing illusion
 
-  fill(255)
-  //Constructing the cloud
-  strokeWeight(10);
-  stroke(cloudOutline);
-  ellipse(-90,-785-animation.wave()*50, 100, 75); //left edge cloud
-  ellipse(70,-785-animation.wave()*50, 100, 75); //right edge cloud
-  ellipse(-10,-800-animation.wave()*50,150, 100); //bottom of cloud
-  noStroke();
-  ellipse(40,-850-animation.wave()*50, 100, 100);
-  ellipse(-50,-825-animation.wave()*50, 100, 100);
+  cloud(-100, -825, animation, 100, 75); //biggest, topmost cloud
+  cloud(-10, -725, animation, 90, 65); //middle cloud
+  cloud(-150, -635, animation, 30, 5); //border-esque pattern 
+  
 
-  //Cloud shading
-  fill(250, 225, 202);
-  ellipse(-90,-785-animation.wave()*50, 100, 75); //left edge cloud
-  ellipse(70,-785-animation.wave()*50, 100, 75); //right edge cloud
-  ellipse(-10,-789-animation.wave()*50,150, 75); //bottom of cloud
 
 }
 
@@ -68,4 +76,28 @@ function whales(x, y, animation, pScope){
     
   }
   pop()
+}
+
+function cloud(x, y, animation, w, h){
+
+  let cloudOutline = color(232, 161, 46);
+
+  fill(255)
+  //Constructing the cloud
+  strokeWeight(10);
+  stroke(cloudOutline);
+  ellipse(x,y-animation.wave()*50, w, h); //left edge cloud
+  ellipse(x + 160, y-animation.wave()*50, w, h); //right edge cloud
+  ellipse(x + 80, (y-15)-animation.wave()*50,w + 50, h + 25); //bottom of cloud
+  noStroke();
+  ellipse(x + 130, (y-65)-animation.wave()*50, w, h + 25);
+  ellipse(x + 40,(y-40)-animation.wave()*50, w, h + 25); //top edges of cloud without lines
+
+  //Cloud shading
+  fill(250, 225, 202);
+  ellipse(x,y-animation.wave()*50, w, h); //left edge cloud
+  ellipse(x + 160,y-animation.wave()*50, w, h); //right edge cloud
+  ellipse(x + 80,(y -4)-animation.wave()*50,w + 50, h); //bottom of cloud
+
+
 }
