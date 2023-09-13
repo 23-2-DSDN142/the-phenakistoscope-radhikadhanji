@@ -86,16 +86,18 @@ function cloud(x, y, animation, w, h){
   ellipse(x,y-animation.wave()*50, w, h); //left edge cloud
   ellipse(x + 160, y-animation.wave()*50, w, h); //right edge cloud
   ellipse(x + 80, (y-15)-animation.wave()*50,w + 50, h + 25); //bottom of cloud
-  noStroke();
+  if(w > 50){
+    noStroke();
   ellipse(x + 130, (y-65)-animation.wave()*50, w, h + 25);
   ellipse(x + 40,(y-40)-animation.wave()*50, w, h + 25); //top edges of cloud without lines
+
+  }
+
 
   //Cloud shading
   fill(250, 225, 202);
   ellipse(x,y-animation.wave()*50, w, h); //left edge cloud
   ellipse(x + 160,y-animation.wave()*50, w, h); //right edge cloud
   ellipse(x + 80,(y -4)-animation.wave()*50,w + 50, h); //bottom of cloud
-
-
 
 }
