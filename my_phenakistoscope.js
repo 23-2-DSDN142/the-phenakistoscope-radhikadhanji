@@ -33,7 +33,7 @@ function setup_layers(pScope){
 }
 
 function sky() {
-  const first = color(219, 251, 255); //constant for lightest colour (219, 251, 255)
+  const first = color(219, 251, 255); //constant for lightest colour 
   const last = color(140, 176, 237); //constant for darkest colour
   
   const firstCol = lerpColor(first, last, 0.15); //lightest
@@ -94,7 +94,7 @@ function cloud(x, y, animation, w, h){
   ellipse(x + 80, (y-15)-animation.wave()*50,w + 50, h + 25); //bottom of cloud
 
   if(w > 50){
-    //If it is not the border cloud
+    //If it is not the border, add white areas above
     noStroke();
     ellipse(x + 130, (y-65)-animation.wave()*50, w, h + 25);
     ellipse(x + 40,(y-40)-animation.wave()*50, w, h + 25); //top edges of cloud without lines
