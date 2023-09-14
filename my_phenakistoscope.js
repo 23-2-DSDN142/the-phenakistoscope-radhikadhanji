@@ -18,6 +18,10 @@ function setup_layers(pScope){
   skyLayer.mode( RING );
   skyLayer.set_boundary( 0, 1000 ); 
 
+  var seaLayer = new PLayer(sea);
+  seaLayer.mode( RING );
+  seaLayer.set_boundary( 0, 1000 ); 
+
   var layer1 = new PLayer(clouds);
   layer1.mode( RING );
   layer1.set_boundary( 0, 1000 ); 
@@ -39,47 +43,49 @@ function sky() {
   noStroke();
 
   fill(fourthCol);
-  ellipse(0, 0, 2000);
+  ellipse(0, 0, 2000); //edge ring
 
   fill(thirdCol);
-  ellipse(0, 0, 1800);
+  ellipse(0, 0, 1800); //2nd closest to middle ring
   
   fill(secondCol);
-  ellipse(0, 0, 1500);
+  ellipse(0, 0, 1500); //Closest to middle ring
 
   fill(firstCol);
-  ellipse(0, 0, 1200);
+  ellipse(0, 0, 1200); //middle ring
+}
+
+function sea(x, y, animation, pScope){
+
+  pScope.draw_image("sea", x, -y-animation.wave()*100); //draws sea w/wave to give a bouncing illusion
+
 }
 
 
 function clouds(x, y, animation, pScope){
-  
-  pScope.draw_image("sea", x, -y-animation.wave()*100); //draws sea w/wave to give a bouncing illusion
 
   cloud(-100, -825, animation, 100, 75); //biggest, topmost cloud
   cloud(-10, -725, animation, 90, 65); //middle cloud
   cloud(-150, -625, animation, 30, 5); //border-esque pattern 
-  
 
 }
 
+
 function whales(x, y, animation, pScope){
-  push()
-  //scale(3)
   if(animation.frame == 0){
+    //Only draws whale on one frame of the animation
     fill(255)
     scale(0.35);
-   pScope.draw_image("whale", -10,-1500-animation.wave()*100); //x, y
-    
+   pScope.draw_image("whale", -10,-1500-animation.wave()*100); 
   }
-  pop()
 }
 
 function cloud(x, y, animation, w, h){
+  //Draws a single cloud
 
   let cloudOutline = color(232, 161, 46);
 
-  fill(255)
+  fill(255);
   //Constructing the cloud
   strokeWeight(10);
   stroke(cloudOutline);
